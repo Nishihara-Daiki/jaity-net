@@ -1,0 +1,251 @@
+body {
+	position: relative;
+}
+
+section {
+	padding: 8px 24px;
+}
+
+.information {
+	float: left;
+}
+
+.view {
+	float: left;
+	width: 526px;
+}
+
+.view-wrapper {
+	width: 100%;
+	padding-top: 56.25%;
+	position: relative;
+}
+
+.view-wrapper iframe {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: solid 1px #333;
+	display: block;
+}
+
+.playerlist table th, .playerlist table td {
+	padding: 4px;
+	border-right: solid 1px #333;
+}
+
+.playerlist table th:last-child, .playerlist table td:last-child {
+	border: none;
+}
+
+.playerlist table.thead {
+	border-bottom: solid 1px #333;
+}
+
+.playerlist table.tbody {
+	height: 520px;
+	overflow: auto;
+	display: inline-block;
+	border-bottom: solid 1px #333;
+}
+
+.playerlist .tbody tr:not(.selected):hover {
+	background: #eee;
+}
+
+.playerlist tr.selected {
+	background: #ccc;
+}
+
+.playerlist tr.retired, .playerlist tr.retired input {
+	color: red;
+}
+
+.playerlist tr :nth-child(1) { width: 60px; }
+.playerlist tr :nth-child(2) { width: 110px; }
+.playerlist tr :nth-child(3) { width: 140px; }
+.playerlist tr :nth-child(4) { width: 90px; }
+.playerlist tr :nth-child(5) { width: 90px; }
+.playerlist tr :nth-child(6) { width: 90px; }
+.playerlist tr :nth-child(7) { width: 90px; }
+.playerlist tr :nth-child(8) { width: 50px; }
+
+.playerlist tr td:nth-child(1) { text-align: center; cursor: pointer;}
+.playerlist tr td:nth-child(2) { cursor: pointer; }
+.playerlist tr td:nth-child(3) { cursor: pointer; }
+.playerlist tr td:nth-child(4) { text-align: right; }
+.playerlist tr td:nth-child(5) { text-align: right; }
+.playerlist tr td:nth-child(6) { text-align: right; }
+.playerlist tr td:nth-child(7) { text-align: right; cursor: pointer; }
+.playerlist tr td:nth-child(8) { text-align: center; cursor: pointer; }
+
+.playerlist input {
+	margin: 0;
+	padding: 4px;
+	border: none;
+	text-align: right;
+	font-size: 1em;
+	width: 100%;
+}
+
+
+.command {
+	width: 791px;
+}
+
+.command::after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.command a {
+	text-decoration: none;
+}
+
+.command .other-display {
+	float: left;
+}
+
+button {
+	padding: 8px;
+	font-size: 1em;
+	text-decoration: none;
+	display: block;
+	outline: none;
+}
+
+button.on {
+	background-color: #999;
+	/*color: #333;*/
+}
+
+.command a:first-child button {
+	margin-bottom: 8px;
+}
+
+.command textarea {
+	margin-left: 24px;
+	padding: 4px;
+	height: 84px;
+	width: 256px;
+	float: left;
+	font-size: 1em;
+}
+
+.command .switch-buttons {
+	float: right;
+	width: 240px;
+	position: relative;
+}
+
+.command .switch-buttons.auto::before {
+	content: 'auto';
+	padding-left: 8px;
+	width: 240px;
+	min-height: 100px;
+	height: 115%;
+	color: red;
+	background: rgba(255,0,0,0.2);
+	line-height: 1;
+	font-size: 16px;
+	position: absolute;
+	top: -15%;
+	left: 0;
+}
+
+.command .switch-buttons button {
+	margin: 0 0 8px 8px;
+	width: 112px;
+	float: left;
+}
+
+.command .special-switch-buttons {
+	float: right;
+	width: 80px;
+}
+
+.command .special-switch-buttons button {
+	margin: 0 0 8px 16px;
+	width: 64px;
+	float: left;
+}
+/*
+.command .special-switch-buttons div {
+	margin: 0 0 8px 8px;
+	width: 120px;
+	float: left;
+}
+
+.command .special-switch-buttons div input {
+	width: 32px;
+	height: 24px;
+	padding: 8px;
+	font-size: 1em;
+}
+*/
+.submit-button button {
+	margin: 0 auto;
+	display: block;
+}
+
+.auto-popup {
+	padding: 24px 5%;
+	width: 30%;
+	top: 20px;
+	left: 30%;
+	position: absolute;
+	background: white;
+	box-shadow: 0 0  2px 2px #ccc;
+	display: none;
+}
+
+.auto-popup h3 {
+	margin: 32px 0 8px;
+	font-weight: normal;
+}
+
+.auto-popup input {
+	width: 80px;
+	padding: 4px;
+	font-size: 1em;
+}
+/*
+.auto-popup ul::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+*/
+.auto-popup li {
+	margin: 8px 0;
+	/*width: 50%;*/
+	/*float: left;*/
+	list-style: none;
+}
+
+.auto-popup label {
+	width: 100%;
+	display: block;
+}
+
+.auto-popup input[type="checkbox"] {
+	width: 16px;
+}
+
+.popup-buttons {
+	margin: 40px 0 16px;
+}
+.popup-buttons::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.popup-buttons button {
+	width: 120px;
+}
+.popup-buttons button:first-child { float: left; }
+.popup-buttons button:last-child { float: right; }

@@ -1,0 +1,116 @@
+html {
+	height: 100%;
+}
+
+body {
+	position: relative;
+	height: 100%;
+/*	background: #3333cc;
+	color: #fefefe;*/
+	transform-origin: center left;
+	background: #000;
+}
+
+section {
+	margin-top: -294.451733832px; /* height / 2 */
+	padding: 40px;
+	width: 1286px;  /* 1366 - padding * 2 */
+	height: 508.903467665px;  /* width * 0.43111527647 - padding * 2 */
+	display: none;
+	font-size: 4rem;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	background: white;
+}
+
+
+.score > * {
+	margin: 0 10%;
+	width: 80%;
+}
+.score h2 {
+	font-size: 1em;
+	font-weight: normal;
+}
+
+.score table {
+	margin-top: 12px;
+	width: 80%;
+}
+.score td {
+	line-height: 1.25;
+}
+.score table tr:nth-child(3) {
+	border-bottom: solid 4px #000;
+}
+.score table td:first-child {
+	/*width: 80%;*/
+	font-size: 2.5rem;
+}
+.score table td:last-child {
+	text-align: right;
+}
+
+
+.rank {
+	/*margin: 0 auto;*/
+	/*width: 756px;*/
+	font-size: 3rem;
+}
+
+.rank table {
+	width: 70%;
+	margin: 0 15%
+	/*width: 40%;*/
+	/*float: left;*/
+}
+/*.rank table:fitst-child { margin-right: 10%; }
+.rank table:last-child { margin-left: 10%; }*/
+
+.rank td {
+	padding: 0 12px;
+	line-height: 1.35;
+}
+
+.rank td:last-child {
+	text-align: right;
+}
+
+/*.rank td:nth-child(3) { border-right: solid 1px #000;}*/
+/*.rank td:nth-child(3n) { text-align: right; }*/
+/*.rank td:nth-child(3n+1)::after { content: "." }*/
+
+
+.message p {
+	margin: 40px 10%;	
+	/*padding-top: 80px;*/
+}
+
+
+.order p {
+	/*width: 100%;*/
+}
+
+.order > * {
+	margin: 0 80px;
+}
+
+.order .number {
+	margin-top: 80px;
+}
+/*
+.order .number::before {
+	content: "order: ";
+}*/
+
+.order .name {
+	margin-top: 24px;
+	font-size: 7rem;
+	/*text-align: center;*/
+}
+
+.order .assign {
+	margin-top: 0px;
+	/*text-align: center;*/
+}

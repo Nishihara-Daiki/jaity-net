@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta NAME=”ROBOTS” CONTENT=”NOINDEX,NOFOLLOW,NOARCHIVE”>
+	<title>Score Board</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/control.css">
+</head>
+<body>
+	<!-- <p class="warn">1200 x 675 以上の画面推奨。</p> -->
+
+	<div class="information">
+		<section class="playerlist" id="playerlist">
+			<h2>
+				選手一覧（クラス名<select id="class_name"></select>）
+			</h2>
+			<table class="thead">
+				<thead>
+					<tr>
+						<th>滑走順</th><th>名前</th><th>所属</th><th>Total ES</th><th>Total PCS</th><th>Deductions</th><th>Total SS</th><th>Rank</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="tbody">
+<!-- 				<tbody>
+					<tr>
+						<td>1</td><td>羽生結弦</td><td>ANA</td><td><input value="113.55"></td><td><input value="101.14"></td><td><input value="0.00"></td><td>214.96</td><td>1</td>
+					</tr>
+					<tr>
+						<td>1</td><td>屋金崚太</td><td>大阪大学</td><td><input value="5.92"></td><td><input value="12.06"></td><td><input value="0.00"></td><td>17.48</td><td>2</td>
+					</tr>
+					<tr>
+						<td>1</td><td>ひと</td><td>大学</td><td><input value=""></td><td><input value=""></td><td><input value="0.00"></td><td></td><td></td>
+					</tr>
+				</tbody> -->
+			</table>
+		</section>
+		<section class="command">
+			<div class="other-display">
+				<a href="display.html" target="_blank"><button>表示画面を開く</button></a>
+				<a href="edit.html" target="_blank"><button>編集画面を開く</button></a>
+			</div>
+			<textarea id="message-text" placeholder="メッセージ"></textarea>
+			<div class="special-switch-buttons" id="special-switch-buttons">
+				<button value="none">消す</button>
+				<button value="auto" id="auto-button">自動</button>
+			</div>
+			<div class="switch-buttons" id="switch-buttons">
+				<button value="order">滑走者</button>
+				<button value="rank">暫定順位</button>
+				<button value="score">個人スコア</button>
+				<button value="message">メッセージ</button>
+			</div>
+		</section>
+	</div>
+	<div class="view">
+		<section class="current">
+			<h2>現在の表示</h2>
+			<div class="view-wrapper">
+				<iframe src="display.html"></iframe>
+			</div>
+		</section>
+		<section class="submit-button" id="submit-button">
+			<button>↑↑ 送信 ↑↑</button>
+		</section>
+		<section class="preview">
+			<h2>プレビュー</h2>
+			<div class="view-wrapper">
+				<iframe id="preview-iframe" src=""></iframe>
+			</div>
+		</section>
+	</div>
+
+	<div class="auto-popup" id="auto-popup">
+		<h3>表示させる画面</h3>
+		<ul class="auto-popup-options" id="auto-popup-options">
+			<li><label><input type="checkbox" value="order">滑走者</label></li>
+			<li><label><input type="checkbox" value="score" checked>個人スコア</label></li>
+			<li><label><input type="checkbox" value="rank" checked>暫定順位</label></li>
+			<li><label><input type="checkbox" value="message">メッセージ</label></li>
+		</ul>
+		<h3>滑走者範囲</h3>
+		<input id="auto-popup-start" value="1">〜<input id="auto-popup-end" value="6">
+		<h3>画面切り替え間隔</h3>
+		<input value="5" id="auto-popup-interval">秒
+		<div class="popup-buttons">
+			<button id="auto-popup-cancel">キャンセル</button>
+			<button id="auto-popup-ok">プレビュー</button>
+		</div>
+	</div>
+
+	<script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/control.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	font-size: 16px;
+}
+
+html,body,input,textarea,option,select {
+	font-family: "游ゴシック Medium","Yu Gothic Medium","游ゴシック体",YuGothic,sans-serif;
+}
+
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+/*
+@media screen and (min-width: 1200px) and (min-height: 675px) {
+.warn {
+	display: none;
+	color: red;
+}
+}*/
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+th {
+	font-weight: normal;
+}
+
+select {
+	margin: 0px 8px;
+	display: inline-block;
+	/*padding: 8px;*/
+}
+
+
+textarea.edit {
+	width: 520px;
+	height: 180px;
+}
+
+
