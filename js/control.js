@@ -208,8 +208,12 @@ function create_player_list() {
 			pcs = +player[3];
 			deduction = +player[4];
 			tss = calc_total_segment_score(es, pcs, deduction);
+			tss = pad_two_decimal_with_zeros(tss);
 			rank = 0;
 		}
+		es = es !== "" ? pad_two_decimal_with_zeros(es) : "";
+		pcs = pcs !== "" ? pad_two_decimal_with_zeros(pcs) : "";
+		deduction = deduction !== "" ? pad_two_decimal_with_zeros(deduction) : "";
 		let cls = '';
 		if(player[5] == true)
 			cls = ' class="retired"';
@@ -227,6 +231,9 @@ function create_player_list() {
 	}
 
 	$('#playerlist .tbody input').change(function() {
+		if ($(this).val() !== '') {
+			$(this).val(pad_two_decimal_with_zeros($(this).val()));
+		}
 		var $trs = $('#playerlist .tbody tr')
 		var order = $trs.index($(this).closest("tr"));
 		var $tr = $trs.eq(order);
@@ -236,6 +243,9 @@ function create_player_list() {
 		var deduction = $inputs.eq(2).val();
 		current.score = [order,es,pcs,deduction];
 		var tss = calc_total_segment_score(es, pcs, deduction);
+		if (tss !== "") {
+			tss = pad_two_decimal_with_zeros(tss);
+		}
 		// if(current.players[order][5])
 		// 	tss = "";
 		update_score(order, tss);
@@ -271,6 +281,12 @@ function calc_total_segment_score(es, pcs, deduction) {
 		return (Math.abs((+es)*100)+Math.abs((+pcs)*100)-Math.abs((+deduction)*100))/100;
 	else 
 		return "";
+}
+
+
+function pad_two_decimal_with_zeros(number) {
+	fixed = (+number).toFixed(2);
+	return +fixed === +number ? fixed : "" + number;
 }
 
 
@@ -333,30 +349,16 @@ function get_display_obj(displaystr) {
 		};
 		break;
 	case "rank":
-		// for(let i = 0; i < 8 && i < current.players.length; i++) {
-		// 	if(current.ranking_table[i] == "")
-		// 		break;
-		// 	let rn = "r" + i, namen = "name" + i, scoren = "score" + i;
-		// 	let p = current.players[+current.ranking_table[i]-1];
-		// 	console.log(p.length);
-		// 	obj[rn] = "" + i;
-		// 	obj[namen] = current.players[current.ranking_table[i]-1][0]; //p[0];
-		// 	obj[scoren] = get_total_segment_score(p);
-		// }
-		// break;
-
-
-		for(let i = 0; i < current.ranking_table.length; i++) {
-			let rank = +current.ranking_table[i];
-			if(rank == 0)
-				continue;
-			if(rank > 8)
-				continue;
-			let rn = "r" + rank, namen = "name" + rank, scoren = "score" + rank;
-			obj[rn] = "" + rank;
-			obj[namen] = current.players[i][0];
-			obj[scoren] = get_total_segment_score(current.players[i]);
-		}
+		current.ranking_table.map((rank, i) => {
+			return {'rank': +rank, 'name': current.players[i][0], 'score': pad_two_decimal_with_zeros(get_total_segment_score(current.players[i]))};
+		})
+		.filter(v => v.rank != 0)
+		.sort((a, b) => a.rank - b.rank)
+		.forEach((v, i) => {
+			obj[`r${i+1}`] = '' + v.rank;
+			obj[`name${i+1}`] = v.name;
+			obj[`score${i+1}`] = v.score;
+		});
 		break;
 	case "message":
 		obj = {"text": $("#message-text").val().replace(/\n/g, "<br>")};
