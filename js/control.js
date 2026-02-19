@@ -15,14 +15,14 @@ var current = {
 		var ranking = [];
 		var rank = [];
 		for(let [i,player] of this.players.entries()) {
-			ranking[i] = [i, get_total_segment_score(player)];
+			ranking[i] = [i, get_total_segment_score(player), +player[3]];
 		}
-		ranking.sort(function(a,b){return b[1]-a[1]});
+		ranking.sort(function(a,b){return a[1] == b[1] ? b[2]-a[2] : b[1]-a[1]});
 		var tmp = [];
 		for(let [i,r] of ranking.entries()) {
 			// rank[i] = r[1] === "" ? "" : r[1] === tmp ? rank[i-1] : r[0];
-			rank[r[0]] = r[1] === "" ? "" : r[1] === tmp[1] ? tmp[0] : "" + (i + 1);
-			tmp = [rank[r[0]], r[1]];
+			rank[r[0]] = r[1] === "" ? "" : r[1] === tmp[1] && r[2] === tmp[2] ? tmp[0] : "" + (i + 1);
+			tmp = [rank[r[0]], r[1], r[2]];
 		}
 		return rank;
 	},
@@ -304,9 +304,10 @@ function update_score(order, tss) {
 
 // ランキングして更新
 function reranking() {
-	$trs = $('#playerlist .tbody tr');
+	const $trs = $('#playerlist .tbody tr');
+	const ranking_table = current.ranking_table;
 	for(let i = 0; i < $trs.length; i++) {
-		$trs.eq(i).find('td').eq(7).text(current.ranking_table[i])
+		$trs.eq(i).find('td').eq(7).text(ranking_table[i]);
 	}
 }
 
