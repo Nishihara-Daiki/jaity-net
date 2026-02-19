@@ -62,9 +62,6 @@ var current = {
 			this.autotimerid = undefined;
 		this.__auto_timer_status = status;
 	}
-	// get isauto() {
-	// 	return this.__auto_timer_id !== undefined;
-	// }
 }
 
 $(function() {
@@ -84,7 +81,7 @@ $(function() {
 		var content = get_display_obj($(this).val());
 		current.preview = content;
 		url = "display.html?scorebord_data=" + encodeURI(JSON.stringify(current.preview));
-		$('#preview-iframe').attr("src", url);
+		document.getElementById('preview-iframe').contentWindow.postMessage(current.preview, "*");
 		$('#switch-buttons button').removeClass('on');
 		$(this).addClass('on');
 		$('#special-switch-buttons button:first-child').removeClass('on');
@@ -123,7 +120,6 @@ $(function() {
 		$('#auto-button').addClass('on');
 		$('#switch-buttons').addClass('auto');
 		var now = 0;
-		// var isautosubumit = false;
 		var autoplaylist = [];
 		current.autotimerstatus = 'standby';
 
@@ -157,8 +153,6 @@ $(function() {
 
 		$('#auto-popup').css({"display": "none"});
 
-		// current.autotimerid = undefined;	// 現在動いてるタイマーストップ
-
 		function next() {
 			current.autotimerid = undefined;
 			if(autoplaylist.length == 0) {
@@ -169,7 +163,7 @@ $(function() {
 			let playernum = autoplaylist[now][1];
 			if(playernum !== undefined)
 				$('#playerlist .tbody tr').eq(playernum).children('td:nth-child(2)').click();	// 選手選択
-			$('#switch-buttons button[value="' + autoplaylist[now][0] + '"').click();
+			$('#switch-buttons button[value="' + autoplaylist[now][0] + '"]').click();
 			if(current.autotimerstatus === 'run')
 				$('#submit-button button').click();
 			now++;
@@ -199,7 +193,7 @@ function update() {
 // 選手一覧作成
 function create_player_list() {
 	var $table = $("#playerlist table.tbody");
-	$table.html("");
+	let table_inner_html = "";
 
 	for(let [i, player] of current.players.entries()) {
 		let es = "", pcs = "", deduction = "", tss = "", rank = "";
@@ -227,8 +221,9 @@ function create_player_list() {
 		s += '<td>' + tss + '</td>';
 		s += '<td>' + rank + '</td>';
 		s += '</tr>';
-		$table.append(s);
+		table_inner_html += s;
 	}
+	$table.html(table_inner_html);
 
 	$('#playerlist .tbody input').change(function() {
 		if ($(this).val() !== '') {
@@ -278,14 +273,14 @@ function create_player_list() {
 
 function calc_total_segment_score(es, pcs, deduction) {
 	if(es !== "" && pcs !== "" && deduction !== "")
-		return (Math.abs((+es)*100)+Math.abs((+pcs)*100)-Math.abs((+deduction)*100))/100;
+		return Math.round(Math.abs((+es)*100)+Math.abs((+pcs)*100)-Math.abs((+deduction)*100))/100;
 	else 
 		return "";
 }
 
 
 function pad_two_decimal_with_zeros(number) {
-	fixed = (+number).toFixed(2);
+	let fixed = (+number).toFixed(2);
 	return +fixed === +number ? fixed : "" + number;
 }
 
@@ -309,11 +304,6 @@ function update_score(order, tss) {
 
 // ランキングして更新
 function reranking() {
-	// for(let [i,r] of current.ranking_table.entries()) {
-	// 	if(r !== "") {
-	// 		$('#playerlist .tbody tr').eq(r).find('td').eq(7).text(i+1);
-	// 	}
-	// }
 	$trs = $('#playerlist .tbody tr');
 	for(let i = 0; i < $trs.length; i++) {
 		$trs.eq(i).find('td').eq(7).text(current.ranking_table[i])
@@ -344,7 +334,7 @@ function get_display_obj(displaystr) {
 			"es": player[2],
 			"pcs": player[3],
 			"deductions": player[4],
-			"tss": "" + get_total_segment_score(player),
+			"tss": "" + pad_two_decimal_with_zeros(get_total_segment_score(player)),
 			"rank": current.ranking_table[order]
 		};
 		break;

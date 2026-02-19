@@ -14,5 +14,3 @@ function getLocalStorage() {
 	else
 		return JSON.parse(str)
 }
-
-function createURLparam() {}

@@ -5,8 +5,6 @@ html {
 body {
 	position: relative;
 	height: 100%;
-/*	background: #3333cc;
-	color: #fefefe;*/
 	transform-origin: center left;
 	background: #000;
 }
@@ -45,7 +43,6 @@ section {
 	border-bottom: solid 4px #000;
 }
 .score table td:first-child {
-	/*width: 80%;*/
 	font-size: 2.5rem;
 }
 .score table td:last-child {
@@ -54,19 +51,13 @@ section {
 
 
 .rank {
-	/*margin: 0 auto;*/
-	/*width: 756px;*/
 	font-size: 3rem;
 }
 
 .rank table {
 	width: 70%;
 	margin: 0 15%
-	/*width: 40%;*/
-	/*float: left;*/
 }
-/*.rank table:fitst-child { margin-right: 10%; }
-.rank table:last-child { margin-left: 10%; }*/
 
 .rank td {
 	padding: 0 12px;
@@ -77,19 +68,8 @@ section {
 	text-align: right;
 }
 
-/*.rank td:nth-child(3) { border-right: solid 1px #000;}*/
-/*.rank td:nth-child(3n) { text-align: right; }*/
-/*.rank td:nth-child(3n+1)::after { content: "." }*/
-
-
 .message p {
 	margin: 40px 10%;	
-	/*padding-top: 80px;*/
-}
-
-
-.order p {
-	/*width: 100%;*/
 }
 
 .order > * {
@@ -99,18 +79,12 @@ section {
 .order .number {
 	margin-top: 80px;
 }
-/*
-.order .number::before {
-	content: "order: ";
-}*/
 
 .order .name {
 	margin-top: 24px;
 	font-size: 7rem;
-	/*text-align: center;*/
 }
 
 .order .assign {
 	margin-top: 0px;
-	/*text-align: center;*/
 }

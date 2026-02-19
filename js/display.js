@@ -1,35 +1,23 @@
-// URLパースしてくれるやつ
-// http://phiary.me/javascript-url-parameter-query-string-parse-stringify/
-var QueryString = {  
-	parse: function(text, sep, eq, isDecode) {
-		text = text || location.search.substr(1);
-		sep = sep || '&';
-		eq = eq || '=';
-		var decode = (isDecode) ? decodeURIComponent : function(a) { return a; };
-		return text.split(sep).reduce(function(obj, v) {
-			var pair = v.split(eq);
-			obj[pair[0]] = decode(pair[1]);
-			return obj;
-		}, {});
-	},
-	stringify: function(value, sep, eq, isEncode) {
-		sep = sep || '&';
-		eq = eq || '=';
-		var encode = (isEncode) ? encodeURIComponent : function(a) { return a; };
-			return Object.keys(value).map(function(key) {
-			return key + eq + encode(value[key]);
-		}).join(sep);
-	},
-};
+
+if (isPreview()) {
+	window.addEventListener("message", function(e) {
+		show(e.data);
+	});
+}
+else {
+	window.addEventListener('storage', function(e) {
+		const display = getStorageDisplay();
+		show(display);
+	}, false);
+}
 
 
 $(function() {
-	window.addEventListener('storage', function(e) {
-		show();
-	}, false);
-
 	fitscale();
-	show();
+	if (!isPreview()) {
+		const display = getStorageDisplay();
+		show(display);
+	}
 });
 
 $(window).on('resize', function() {
@@ -47,14 +35,7 @@ function fitscale() {
 
 
 // ストレージ内容に合わせて表示内容更新
-function show() {
-	// var storage = getLocalStorage();
-	// if(storage == null)
-	// 	return;
-
-	// var display = storage.display;
-
-	var display = getShowDisplay();
+function show(display) {
 	if(display == null)
 		return;
 
@@ -72,20 +53,20 @@ function fill(display) {
 	}
 }
 
-// url→storageの優先順位でデータをとってくる
-function getShowDisplay() {
-	var str = QueryString.parse(null, null, null, true).scorebord_data;
-	// console.log(str);
-	if(str === undefined) {
-		display = getLocalStorage().display;
-		if(display == undefined)
-			display = null;
-	}
-	else {
-		display = JSON.parse(str);
-		if(display == "")
-			display = null
-	}
+
+function getStorageDisplay() {
+	const display = getLocalStorage().display;
+	if(display == undefined)
+		display = null;
 	return display;
 }
 
+
+function isPreview() {
+	const params = new URLSearchParams(window.location.search);
+	const is_preview = params.get('is_preview');
+	if (is_preview && is_preview.toLowerCase() == "true") {
+		return true;
+	}
+	return false;
+}
