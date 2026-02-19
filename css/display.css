@@ -28,13 +28,20 @@ section {
 	width: 80%;
 }
 .score h2 {
-	font-size: 1em;
+	font-size: inherit;
 	font-weight: normal;
+}
+.score h2 .score_number {
+	margin-right: 4rem;
+}
+.score p {
+	font-size: 2.5rem;
 }
 
 .score table {
 	margin-top: 12px;
 	width: 80%;
+	font-size: 3.5rem;
 }
 .score td {
 	line-height: 1.25;
@@ -82,9 +89,10 @@ section {
 
 .order .name {
 	margin-top: 24px;
-	font-size: 7rem;
+	font-size: 6rem;
 }
 
 .order .assign {
 	margin-top: 0px;
+	font-size: 3.2rem;
 }
